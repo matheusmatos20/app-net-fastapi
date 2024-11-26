@@ -1,9 +1,7 @@
 import pytest
-from fastapi.testclient import TestClient
 
-from  app.main import app
-
-
-@pytest.fixture(scope="function")
-def api_client():
-    return TestClient(app)
+@pytest.mark.order(1)
+def test_get_aluno(api_client):
+    response = api_client.get("/aluno/")
+    assert response.status_code == 200
+    assert response.json() == "Olá alunos"
